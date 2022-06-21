@@ -13,6 +13,10 @@ public class Animal {
         return name;
     }
 
+    public AnimalType getType() {
+        return type;
+    }
+
     @Override
     public String toString() {
         return "Animal{" +
