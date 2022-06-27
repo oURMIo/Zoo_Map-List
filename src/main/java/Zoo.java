@@ -36,7 +36,7 @@ public class Zoo {
      * @return positive number if added, -1 if can't be added.
      */
     public int addAnimal(Animal animal) {
-        requireNonNull(animal, "Can't add nothing");
+        requireNonNull(animal, "Can't add null");
 
         if (addingStrategy.shouldAdd(animal)) {
             name2Animal.computeIfAbsent(animal.getName(), x -> new ArrayList<>()).add(animal);
@@ -48,7 +48,7 @@ public class Zoo {
     }
 
     public void removeAnimal(Animal animal) {
-        requireNonNull(animal, "Can't remove nothing");
+        requireNonNull(animal, "Can't remove null");
 
         if (removingStrategy.shouldRemove(animal)) {
             name2Animal.computeIfPresent(animal.getName(), (x, animalList) -> {
