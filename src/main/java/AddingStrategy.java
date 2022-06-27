@@ -1,5 +1,6 @@
 import animal.Animal;
 
+@FunctionalInterface
 public interface AddingStrategy {
-    boolean shouldAd(Animal lol);
+    boolean shouldAdd(Animal animal);
 }
