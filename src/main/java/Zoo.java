@@ -7,19 +7,36 @@ import java.util.Map;
 
 public class Zoo {
     private final List<Animal> list = new ArrayList<>();
-    private int i = 0;
-
+    private final AddingStrategy addingStrategy;
+    private final RemoveingStrategy removeingStrategy;
     Map<Integer, String> map1 = new HashMap<>();
 
+    public Zoo() {
+        addingStrategy = null;
+        removeingStrategy = null;
+    }
+
+    public Zoo(AddingStrategy strategy, RemoveingStrategy removeingStrategy) {
+        this.addingStrategy = strategy;
+        this.removeingStrategy = removeingStrategy;
+    }
+    //Function<Animal,Boolean> a1
+
     public int addAnimal(Animal animal) {
-        list.add(animal);
-        map1.put(i, animal.getName());
-        i ++;
-        return i - 1;
+        if (addingStrategy != null && addingStrategy.shouldAd(animal)) {
+            list.add(animal);
+            return list.size() - 1;
+        } else {
+            return -1;
+        }
     }
 
     public void removeAnimal(Animal animal) {
-        list.remove(animal);
+        if (removeingStrategy != null && removeingStrategy.shouldRemove(animal)) {
+            list.remove(animal);
+        } else {
+            System.out.println("We haven't this animal");
+        }
     }
 
     public int getAnimalCount() {

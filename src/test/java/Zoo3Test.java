@@ -12,7 +12,8 @@ class Zoo3Test {
     @ParameterizedTest
     @EnumSource(AnimalType.class)
     void addSmallAnimals(AnimalType animalType) {
-        var zoo = new Zoo(animal -> animal.getType() != ELEPHANT);
+        AddingStrategy addingStrategy = animal -> animal.getType() != ELEPHANT;
+        var zoo = new Zoo(addingStrategy, animal -> true);
         assertEquals(0, zoo.getAnimalCount(), "no animal inside");
         zoo.addAnimal(animalType.create("Petya"));
         if (animalType == ELEPHANT) {
@@ -25,13 +26,14 @@ class Zoo3Test {
     @ParameterizedTest
     @EnumSource(AnimalType.class)
     void addLionAnimal(AnimalType animalType) {
-        var zoo = new Zoo(animal -> animal.getType() == LION);
+        var zoo = new Zoo(animal -> animal.getType() == LION, animal -> true);
         assertEquals(0, zoo.getAnimalCount(), "no animal inside");
         zoo.addAnimal(animalType.create("Petya"));
+        System.out.println(zoo.getAnimalCount());
         if (animalType == LION) {
-            assertEquals(0, zoo.getAnimalCount(), "we like cat-similar");
+            assertEquals(1, zoo.getAnimalCount(), "we like cat-similar");
         } else {
-            assertEquals(1, zoo.getAnimalCount(), "one animal inside");
+            assertEquals(0, zoo.getAnimalCount(), "one animal inside");
         }
     }
 }
