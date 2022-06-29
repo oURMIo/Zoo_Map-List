@@ -1,4 +1,5 @@
 import animal.Animal;
+import animal.AnimalType;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

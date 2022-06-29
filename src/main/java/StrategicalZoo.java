@@ -1,11 +1,8 @@
 import animal.Animal;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.logging.Logger;
+
 import org.jetbrains.annotations.Nullable;
 
 import static java.util.Objects.requireNonNull;
@@ -19,7 +16,8 @@ public class StrategicalZoo implements Zoo {
     private final AddingStrategy addingStrategy;
     private final RemovingStrategy removingStrategy;
 
-    private final List<Animal> animals = new ArrayList<>();
+    //    private final List<Animal> animals = new ArrayList<>();
+    private final Map<Integer, Animal> animals = new HashMap<>();
     private final Map<String, List<Animal>> name2Animal = new HashMap<>();
 
     public StrategicalZoo() {
@@ -44,7 +42,7 @@ public class StrategicalZoo implements Zoo {
 
         if (addingStrategy.shouldAdd(animal)) {
             name2Animal.computeIfAbsent(animal.getName(), x -> new ArrayList<>()).add(animal);
-            animals.add(animal);
+            animals.put(animals.size(), animal);
             return animals.size() - 1;
         } else {
             return -1 /* not added */;
@@ -60,7 +58,7 @@ public class StrategicalZoo implements Zoo {
                 animalList.remove(animal);
                 return animalList.isEmpty() ? null : animalList;
             });
-            animals.remove(animal);
+            animals.remove(getIdByAnimal(animal));
         } else {
             logger.warning("We haven't this animal");
         }
@@ -75,6 +73,37 @@ public class StrategicalZoo implements Zoo {
     @Nullable
     public Animal getAnimalById(int id) {
         return animals.get(id);
+    }
+
+    /**
+     * u get id animal
+     *
+     * @param animal obj
+     * @return her id or -1
+     */
+    public int getIdByAnimal(Animal animal) {
+//        /*   version 1 by Anton and it's evil   */
+//        return animals.entrySet().stream()
+//                .filter(e->e.getValue().equals(animal))
+//                .map(Map.Entry::getKey)
+//                .findFirst()
+//                .orElse(-1);
+
+//        /*   version 2 by Anton  */
+//        for (var id2Animal : animals.entrySet()) {
+//            if (id2Animal.getValue().equals(animal)){
+//                return id2Animal.getKey();
+//            }
+//        }
+//        return -1;
+
+        /*   version 3 by Dima  */
+        for (Integer key : animals.keySet()) {
+            if (animal.equals(animals.get(key))) {
+                return key;
+            }
+        }
+        return -1;
     }
 
     public List<Animal> geAnimalsByName(String name) {

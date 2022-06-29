@@ -11,4 +11,7 @@ public enum AnimalType {
         return new Animal(name, this);
     }
 
+    public void getAnimalType(Animal animal){
+
+    }
 }
