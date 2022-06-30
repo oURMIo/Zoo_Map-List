@@ -11,7 +11,7 @@ class ZooTest {
 
     @Test
     void addAnimal() {
-        var zoo = new Zoo();
+        var zoo = new StrategicalZoo();
         assertEquals(0, zoo.getAnimalCount(), "no animal inside");
         zoo.addAnimal(WOLF.create("Petya"));
         assertEquals(1, zoo.getAnimalCount(), "one animal inside");
@@ -19,7 +19,7 @@ class ZooTest {
 
     @Test
     void removeAnimal() {
-        var zoo = new Zoo();
+        var zoo = new StrategicalZoo();
         assertEquals(0, zoo.getAnimalCount(), "no animal inside");
         var animal = WOLF.create("Vasya");
 
@@ -32,7 +32,7 @@ class ZooTest {
 
     @Test
     void getAnimalByNumber() {
-        var zoo = new Zoo();
+        var zoo = new StrategicalZoo();
         assertEquals(0, zoo.getAnimalCount(), "no animal inside");
 
         zoo.addAnimal(WOLF.create("Petya"));
@@ -50,7 +50,7 @@ class ZooTest {
 
     @Test
     void getAnimalsByNames() {
-        var zoo = new Zoo();
+        var zoo = new StrategicalZoo();
         assertEquals(0, zoo.getAnimalCount(), "no animal inside");
 
         var petyaNameString = "Petya";

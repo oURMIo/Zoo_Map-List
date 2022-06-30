@@ -1,4 +1,5 @@
 import animal.Animal;
+import animal.AnimalType;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -11,7 +12,7 @@ class Zoo2Test {
 
     @Test
     void addAnimal() {
-        var zoo = new Zoo2();
+        var zoo = new StrategicalZoo();
         assertEquals(0, zoo.getAnimalCount(), "no animal inside");
         zoo.addAnimal(WOLF.create("Petya"));
         assertEquals(1, zoo.getAnimalCount(), "one animal inside");
@@ -19,7 +20,7 @@ class Zoo2Test {
 
     @Test
     void removeAnimal() {
-        var zoo = new Zoo2();
+        var zoo = new StrategicalZoo();
         assertEquals(0, zoo.getAnimalCount(), "no animal inside");
         var animal = WOLF.create("Vasya");
 
@@ -32,7 +33,7 @@ class Zoo2Test {
 
     @Test
     void getAnimalByNumber() {
-        var zoo = new Zoo2();
+        var zoo = new StrategicalZoo();
         assertEquals(0, zoo.getAnimalCount(), "no animal inside");
 
         zoo.addAnimal(WOLF.create("Petya"));
@@ -50,7 +51,7 @@ class Zoo2Test {
 
     @Test
     void getAnimalsByNames() {
-        var zoo = new Zoo2();
+        var zoo = new StrategicalZoo();
         assertEquals(0, zoo.getAnimalCount(), "no animal inside");
 
         var petyaNameString = "Petya";

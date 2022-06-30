@@ -1,42 +1,38 @@
 import animal.Animal;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import org.jetbrains.annotations.Nullable;
 
-public class Zoo {
-    private final List<Animal> list = new ArrayList<>();
-    private int i = 0;
+public interface Zoo {
+    /**
+     * Adds nonnull animal to zoo.
+     *
+     * @param animal animal to add.
+     * @return positive number if added, -1 if can't be added.
+     */
+    int addAnimal(Animal animal);
 
-    Map<Integer, String> map1 = new HashMap<>();
+    /**
+     * Removes nonnull animal to zoo.
+     *
+     * @param animal animal to remove
+     */
+    void removeAnimal(Animal animal);
 
-    public int addAnimal(Animal animal) {
-        list.add(animal);
-        map1.put(i, animal.getName());
-        i ++;
-        return i - 1;
-    }
+    /**
+     * How many animal in Zoo.
+     *
+     * @return how many animal in Zoo.
+     */
+    int getAnimalCount();
 
-    public void removeAnimal(Animal animal) {
-        list.remove(animal);
-    }
-
-    public int getAnimalCount() {
-        return list.size();
-    }
-
-    public Animal getAnimalById(int vasyaNumber) {
-        return list.get(vasyaNumber);
-    }
-
-    public List<Animal> geAnimalsByName(String vasya) {
-        final List<Animal> list2 = new ArrayList<>();
-        for (int j = 0; j < list.size() - 1; j++) {
-            if (vasya.equals(map1.get(j))) {
-                list2.add(list.get(j));
-            }
-        }
-        return list2;
-    }
+    /**
+     * Return animal by id, that add was returned.
+     *
+     * @deprecated marked for remove.
+     * @param id id, returned by added.
+     * @return animal or null if not found.
+     */
+    @Nullable
+    @Deprecated(since = "now")
+    Animal getAnimalById(int id);
 }
