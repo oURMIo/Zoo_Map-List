@@ -8,8 +8,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-class ZooDecoratorDTest {
-    private final Logger logger = Logger.getLogger(ZooDecoratorDTest.class.getName());
+class ZooDecoratorTest {
+    private final Logger logger = Logger.getLogger(ZooDecoratorTest.class.getName());
 
     @Test
     void findBug() {
