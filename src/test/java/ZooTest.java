@@ -50,7 +50,7 @@ class ZooTest {
 
     @Test
     void getAnimalsByNames() {
-        var zoo = new StrategicalZoo();
+        var zoo = new NamedZoo(new StrategicalZoo());
         assertEquals(0, zoo.getAnimalCount(), "no animal inside");
 
         var petyaNameString = "Petya";

@@ -28,11 +28,9 @@ public interface Zoo {
     /**
      * Return animal by id, that add was returned.
      *
-     * @deprecated marked for remove.
      * @param id id, returned by added.
      * @return animal or null if not found.
      */
     @Nullable
-    @Deprecated(since = "now")
     Animal getAnimalById(int id);
 }

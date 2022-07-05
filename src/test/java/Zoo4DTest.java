@@ -13,7 +13,7 @@ class Zoo4DTest {
     @ParameterizedTest
     @EnumSource(AnimalType.class)
     void findBug() {
-        var zoo = new StrategicalZoo();
+        var zoo = new NamedZoo(new StrategicalZoo());
         var animal = WOLF.create("Radion");    /*   for assertEquals   */
         zoo.addAnimal(WOLF.create("Radion"));  /* in list 0 */
         zoo.addAnimal(BEAR.create("Kosolap"));  /* in list 1 */

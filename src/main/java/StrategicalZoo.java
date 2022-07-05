@@ -12,13 +12,10 @@ import static java.util.Objects.requireNonNull;
  */
 public class StrategicalZoo implements Zoo {
     private final Logger logger = Logger.getLogger(StrategicalZoo.class.getName());
-
     private final AddingStrategy addingStrategy;
     private final RemovingStrategy removingStrategy;
 
-    //    private final List<Animal> animals = new ArrayList<>();
     private final Map<Integer, Animal> animals = new HashMap<>();
-    private final Map<String, List<Animal>> name2Animal = new HashMap<>();
 
     public StrategicalZoo() {
         this.addingStrategy = x -> true;
@@ -30,34 +27,18 @@ public class StrategicalZoo implements Zoo {
         this.removingStrategy = requireNonNull(removingStrategy, "removingStrategy");
     }
 
-    /**
-     * Adds nonnull animal to zoo.
-     *
-     * @param animal animal to add.
-     * @return positive number if added, -1 if can't be added.
-     */
     @Override
     public int addAnimal(Animal animal) {
-        requireNonNull(animal, "Can't add null");
-
         if (addingStrategy.shouldAdd(animal)) {
-            name2Animal.computeIfAbsent(animal.getName(), x -> new ArrayList<>()).add(animal);
             animals.put(animals.size(), animal);
             return animals.size() - 1;
-        } else {
-            return -1 /* not added */;
         }
+        return -1;
     }
 
     @Override
     public void removeAnimal(Animal animal) {
-        requireNonNull(animal, "Can't remove null");
-
         if (removingStrategy.shouldRemove(animal)) {
-            name2Animal.computeIfPresent(animal.getName(), (x, animalList) -> {
-                animalList.remove(animal);
-                return animalList.isEmpty() ? null : animalList;
-            });
             animals.remove(getIdByAnimal(animal));
         } else {
             logger.warning("We haven't this animal");
@@ -104,9 +85,5 @@ public class StrategicalZoo implements Zoo {
             }
         }
         return -1;
-    }
-
-    public List<Animal> geAnimalsByName(String name) {
-        return name2Animal.getOrDefault(name, Collections.emptyList());
     }
 }
