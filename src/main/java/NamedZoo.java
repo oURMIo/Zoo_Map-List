@@ -2,16 +2,12 @@ import animal.Animal;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
-import java.util.logging.Logger;
-
 import static java.util.Objects.requireNonNull;
 
 /**
  * Decorator
  */
 public class NamedZoo implements Zoo {
-    private final Logger logger = Logger.getLogger("OMG");
-
     private final Zoo theZoo;
     private final Map<String, List<Animal>> name2Animal = new HashMap<>();
 
@@ -23,14 +19,16 @@ public class NamedZoo implements Zoo {
      * Adds nonnull animal to zoo.
      *
      * @param animal animal to add.
-     * @return positive number if added, -1 if can't be added.
+     * @return positive number if added -1 if can't be added.
      */
     @Override
     public int addAnimal(Animal animal) {
         requireNonNull(animal, "Can't add null");
-
-        name2Animal.computeIfAbsent(animal.getName(), x -> new ArrayList<>()).add(animal);
-        return theZoo.addAnimal(animal);
+        int i = theZoo.addAnimal(animal);
+        if (i != -1){
+            name2Animal.computeIfAbsent(animal.getName(), x -> new ArrayList<>()).add(animal);
+        }
+        return i;
     }
 
     @Override
@@ -57,4 +55,8 @@ public class NamedZoo implements Zoo {
     public List<Animal> geAnimalsByName(String name) {
         return name2Animal.getOrDefault(name, Collections.emptyList());
     }
+
+//    public Animal geAnimalsByName(String name) {
+//        return ;
+//    }
 }

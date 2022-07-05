@@ -1,3 +1,4 @@
+import java.util.Collections;
 import java.util.logging.Logger;
 import org.junit.jupiter.api.Test;
 
@@ -22,7 +23,7 @@ class ZooDecoratorTest {
         zoo.addAnimal(king);
 
         assertEquals(2, zoo.getAnimalCount(), "all but elephant is added");
-        assertNull(zoo.geAnimalsByName(pink.getName()), "Pink elephant is expected to be out of zoo");
+        assertEquals(Collections.EMPTY_LIST,zoo.geAnimalsByName(pink.getName()));
 
         zoo.removeAnimal(king);
         assertEquals(2, zoo.getAnimalCount(), "lion is not removed");
